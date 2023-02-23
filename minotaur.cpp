@@ -16,25 +16,27 @@ void minotaur() {
     }
 }
 
-void counter_thread() {
+void counter_thread(int thread_num) {
     int counter = 0;
     while (finished == 0) {
-        if(active_prisoner == 1) {
+        if(active_prisoner == thread_num) {
             if(is_cupcake == 1){
                 is_cupcake == 0;
                 counter++;
                 if(counter == 10)
                     finished = 1;
             }
+            active_prisoner = -1;
         }
     }
 }
 
-void drone_thread() {
+void drone_thread(int thread_num) {
     while(finished == 0) {
-        if(active_prisoner == 1) {
+        if(active_prisoner == thread_num) {
             if(is_cupcake == 0)
                 is_cupcake == 1;
+            active_prisoner = -1;
         }
     }
 }
