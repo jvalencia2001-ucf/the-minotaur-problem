@@ -2,6 +2,7 @@
 #include <random>
 #include <thread>
 #include <mutex>
+#include <vector>
 using namespace std;
 
 int finished = 0;
@@ -72,28 +73,20 @@ int main() {
     std::thread t1(minotaur);
     
     std::thread t2(counter_thread, 1);
-    
-    std::thread t3(drone_thread, 2);
-    std::thread t4(drone_thread, 3);
-    std::thread t5(drone_thread, 4);
-    std::thread t6(drone_thread, 5);
-    std::thread t7(drone_thread, 6);
-    std::thread t8(drone_thread, 7);
-    std::thread t9(drone_thread, 8);
-    std::thread t10(drone_thread, 9);
-    std::thread t11(drone_thread, 10);
+
+    std::vector<std::thread> drones;
+
+    for(int i = 0; i < 9; i++) {
+        std::thread droneThread(drone_thread, i+2);
+        drones.push_back(move(droneThread));
+    }
+
 
     t1.join();
     t2.join();
-    t3.join();
-    t4.join();
-    t5.join();
-    t6.join();
-    t7.join();
-    t8.join();
-    t9.join();
-    t10.join();
-    t11.join();
+    for(int i = 0; i < drones.size(); i++) {
+        drones.at(i).join();
+    }
 
     cout << epochs << '\n';
 
