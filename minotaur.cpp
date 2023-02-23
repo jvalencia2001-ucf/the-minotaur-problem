@@ -37,7 +37,8 @@ void counter_thread(int thread_num) {
         if(active_guest == thread_num) {
             cout << "counter active\n";
             if(is_cupcake == 1){
-                is_cupcake == 0;
+                cout << "counter incremented\n";
+                is_cupcake = 0;
                 counter++;
                 if(counter == 10)
                     finished = 1;
