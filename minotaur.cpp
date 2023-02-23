@@ -7,6 +7,14 @@ int active_prisoner = -1;
 int is_cupcake = 1;
 int epochs = 0;
 
+int generate_random(int range_from, int range_to) {
+    std::random_device                  rand_dev;
+    std::mt19937                        generator(rand_dev());
+    std::uniform_int_distribution<int>  distr(range_from, range_to);
+
+    return distr(generator);
+}
+
 void minotaur() {
     while(finished == 0) {
         if(active_prisoner == -1) {
@@ -39,14 +47,6 @@ void drone_thread(int thread_num) {
             active_prisoner = -1;
         }
     }
-}
-
-int generate_random(int range_from, int range_to) {
-    std::random_device                  rand_dev;
-    std::mt19937                        generator(rand_dev());
-    std::uniform_int_distribution<int>  distr(range_from, range_to);
-
-    return distr(generator);
 }
 
 int main() {
