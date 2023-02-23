@@ -40,10 +40,13 @@ void counter_thread(int thread_num) {
 }
 
 void drone_thread(int thread_num) {
+    int participated = 0;
     while(finished == 0) {
         if(active_prisoner == thread_num) {
-            if(is_cupcake == 0)
-                is_cupcake == 1;
+            if(is_cupcake == 0  && participated == 0) {
+                is_cupcake = 1;
+                participated = 1;
+            }
             active_prisoner = -1;
         }
     }
