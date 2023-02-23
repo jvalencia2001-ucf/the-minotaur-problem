@@ -20,13 +20,14 @@ int generate_random(int range_from, int range_to) {
 
 void minotaur() {
     while(finished == 0) {
+        m.lock();
         if(active_guest == -1) {
-            active_guest = generate_random(1, 10);
-            m.lock();
-            cout << "Guest chosen: " << active_guest << '\n';
-            m.unlock();
+            int guest_chosen = generate_random(1, 10);
+            cout << "Guest chosen: " << guest_chosen << '\n';
+            active_guest = guest_chosen;
             epochs++;
         }
+        m.unlock();
     }
 }
 
