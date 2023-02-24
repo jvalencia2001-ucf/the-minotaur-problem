@@ -38,9 +38,9 @@ void counter_thread(int thread_num) {
         if(active_guest == thread_num) {
             cout << "counter active\n";
             if(is_cupcake == 1){
-                cout << "counter incremented\n";
                 is_cupcake = 0;
                 counter++;
+                cout << "counter incremented to: " << counter << '\n';
                 if(counter == 10)
                     finished = 1;
             }
@@ -49,7 +49,7 @@ void counter_thread(int thread_num) {
             m.unlock();
         }
     }
-    cout << counter << '\n';
+    cout << "Final counter: " << counter << '\n';
 }
 
 void drone_thread(int thread_num) {
@@ -88,7 +88,7 @@ int main() {
         drones.at(i).join();
     }
 
-    cout << epochs << '\n';
+    cout << "Finished in " << epochs << " minotaur requests." << '\n';
 
 
 }
